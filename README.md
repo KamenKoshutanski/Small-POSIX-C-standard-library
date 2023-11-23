@@ -1,1 +1,1 @@
-# Small-POSIX-C-standard-library
+# Small-standard-C-library-for-Linux
