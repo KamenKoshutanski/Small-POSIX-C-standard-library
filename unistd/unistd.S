@@ -3,7 +3,7 @@
 .global write
 
 write:   	
-	mov w8, #64 //Syscall number for write for ARM64
+	mov w8, #64 
     svc #0
 
     ret
@@ -16,10 +16,10 @@ _exit:
 
 .global read
 
-read:
+//read:
     //ldr x1, =buffer
-    mov w8, #63
-    svc #0
+   // mov w8, #63
+   // svc #0
     
-.section .data
-buffer: .space 100
+//.section .data
+//buffer: .space 100

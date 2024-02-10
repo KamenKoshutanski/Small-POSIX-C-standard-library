@@ -1,14 +1,15 @@
-#include <stdio.h>
-#include "stdint.h"
-#include "math_test.h"
+#include "stdio.h"
+#include "../unistd/unistd.h"
 
-void main(){
-	bool b = true;
-	int a = 5;
-  	printf("%d\n", a);
-	printf("%d\n", b);
-  	a = _plus(a);
-  	printf("%d\n", a);
-  	a = _minus(a);
-  	printf("%d\n", a);
+int main(){
+    printf("Hello\n");
+    printf("%ls %c", "Hello world Yey\n" "\n");
+    printf("%s", "AHell\n");
+    printf("%c", "B");
+    //printf("%d\n", 4343);
+    return 0;
+}
+void _start(){
+    int main_ret = main();
+    _exit(main_ret);
 }

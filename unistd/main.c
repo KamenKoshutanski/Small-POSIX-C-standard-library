@@ -1,9 +1,8 @@
 #include "unistd.h"
 
 int main(){
-    int fd = write(STDOUT, "Hello", 6);
-    const void* buf;
-    int d1 = read(STDIN, buf, 100);
+    char* buf = "Hello\n";
+    int fd = write(STDOUT, buf, 6);
     return 0;
 }
 void _start(){
