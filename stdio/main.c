@@ -3,10 +3,10 @@
 
 int main(){
     printf("Hello\n");
-    printf("%ls %c", "Hello world Yey\n" "\n");
-    printf("%s", "AHell\n");
-    printf("%c", "B");
-    //printf("%d\n", 4343);
+    //printf("%ls %c", "Hello world Yey\n" "\n");
+    //printf("%s", "AHell\n");
+    //printf("%c", "B");
+    printf("%d\n", 2);
     return 0;
 }
 void _start(){
