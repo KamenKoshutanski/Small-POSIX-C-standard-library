@@ -3,9 +3,10 @@
 double ln(double x);
 double log10(double x);
 double log2(double x);
-double pow1(double x, int y); //should be double
-double sqrt1(double x);
-double ceil1(double x);
-double fabs1(double x);
-double floor1(double x);
-double fmod1(double x, double y); 
+double pow(double x, int y); //should be double
+double sqrt(double x);
+double ceil(double x);
+double fabs(double x);
+double floor(double x);
+double fmod(double x, double y); 
+double log(int base, double x);

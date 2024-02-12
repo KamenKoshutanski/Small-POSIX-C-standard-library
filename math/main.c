@@ -1,12 +1,10 @@
 #include "math.h"
 #include <stdio.h>
+#include <math.h>
 //Used for testing only
 int main()
 {
-    printf("%f\n", ceil(2.5));
-    printf("%f\n", fabs(-2.5));
-    printf("%f\n", fabs(2.5));
-    printf("%f\n", floor(2.5));
-    printf("%f\n", fmod(9.2, 3.7));
+    printf("%f\n", sin(100));
+    printf("%f\n", sin1(100));
     return 0;
 }

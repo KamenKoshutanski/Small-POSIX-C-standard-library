@@ -36,7 +36,7 @@ double ln(double x)
     return 2.0 * sum;
 }
 
-double log10( double x ) 
+double log10(double x) 
 {
     return ln(x) / LN10;    
 }
@@ -114,4 +114,9 @@ double fmod(double x, double y) //not correctly implemented
         double remainder = x - (result * y);
         return remainder;
     }
+}
+
+double log(int base, double x)
+{
+    return log10(x)/log10(base);
 }
