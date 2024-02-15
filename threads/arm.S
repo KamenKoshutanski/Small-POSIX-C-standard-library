@@ -13,3 +13,10 @@ getppid1:
     mov w8, #173
     svc #0
     ret
+
+.global clone1
+
+clone1:
+    mov w8, #220
+    svc #0
+    ret
