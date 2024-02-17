@@ -1,10 +1,7 @@
-#include <stdio.h>
-//#include <sched.h>
-//#include <stdlib.h>
-//#include <sys/wait.h>
 //#include <unistd.h>
+#include <stdio.h>
+//#include <stdlib.h>
 #include "stdlib1.h"
-#include "threads.h"
 
 typedef int bool;
 
@@ -94,37 +91,51 @@ void print_blocks(m_block* current){
     }
 }
 
-int fn(void *arg)
+
+int main()
 {
-   printf("\nINFO: This code is running under child process. %d\n", getpid1());
+    init();
+    m_block* block = NULL ; 
+    malloc1(1024*1024 , &block); 
+    malloc1(1 , &block);
+    malloc1(1 , &block);
+    print_blocks(block);
 
-   int i = 0;
-
-   for ( i = 1 ; i <= 10 ; i++ )
-      printf("%d * %d = %d\n", 6, i, (6*i));
-
-   printf("\n");
-
-   return 0;
-}
-
-void main(int argc, char *argv[])
-{
-   printf("Hello, World!\n");
-
-   init();
-   m_block* block = NULL ; 
-   malloc1(1024*1024 , &block); 
-   void *pchild_stack = block->mem_addr;
-   if ( pchild_stack == NULL ) {
-      printf("ERROR: Unable to allocate memory.\n");
-   }
-
-   int pid = clone1(fn, pchild_stack, 0, argv[1]); //SIGCHILD
-   if ( pid < 0 ) {
-        printf("ERROR: Unable to create the child process.\n");
-   }
-
-
-   printf("INFO: Child process terminated.%d\n", getpid1());
+    /*int* ptr;
+    int n, i;
+ 
+    // Get the number of elements for the array
+    printf("Enter number of elements:");
+    scanf("%d",&n);
+    printf("Entered number of elements: %d\n", n);
+ 
+    // Dynamically allocate memory using malloc()
+    init();
+    m_block* block = NULL ; 
+    malloc1(n * sizeof(int) , &block); 
+    ptr = block->mem_addr;
+ 
+    // Check if the memory has been successfully
+    // allocated by malloc or not
+    if (ptr == NULL) {
+        printf("Memory not allocated.\n");
+        exit(0);
+    }
+    else {
+ 
+        // Memory has been successfully allocated
+        printf("Memory successfully allocated using malloc.\n");
+ 
+        // Get the elements of the array
+        for (i = 0; i < n; ++i) {
+            ptr[i] = i + 1;
+        }
+ 
+        // Print the elements of the array
+        printf("The elements of the array are: ");
+        for (i = 0; i < n; ++i) {
+            printf("%d, ", ptr[i]);
+        }
+    }*/
+    return 0;
 }

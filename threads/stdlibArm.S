@@ -1,8 +1,8 @@
 .section .text
 
-.global mmap
+.global mmap1
 
-mmap:
+mmap1:
     mov w8, #222
     svc #0
     ret

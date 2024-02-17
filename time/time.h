@@ -1,6 +1,6 @@
 #pragma once
 //#include "../stdint.h"
-#include <stdint.h>
+#include "../stdint.h"
 typedef long clock_t;
 typedef int32_t __time32_t;	
 typedef int64_t __time64_t;	

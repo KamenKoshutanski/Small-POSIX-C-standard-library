@@ -42,7 +42,7 @@ unsigned int strlen_printf(const char *s)
     return count;
 }
 
-/*void printf(const char* fmt, ...)
+void printf(const char* fmt, ...)
 {
     const char* arg = fmt;
     int state = PRINTF_STATE_DEFAULT;
@@ -179,7 +179,7 @@ unsigned int strlen_printf(const char *s)
     }
     arg = "";
 }
-*/
+
 const char g_HexChars[] = "0123456789abcdef";
 
 const char* printf_number(const char* arg, int length, bool sign, int numSystem)
@@ -283,7 +283,7 @@ char *gets(char *str){
 }*/
 
 
-void printf(const char* fmt, ...)
+/*void printf1(const char* fmt, ...)
 {
     int* arg = (int*)&fmt;
     int state = PRINTF_STATE_DEFAULT;
@@ -363,9 +363,9 @@ void printf(const char* fmt, ...)
                     case 's':   
                         if (length == PRINTF_LENGTH_LONG || length == PRINTF_LENGTH_LONG_LONG) 
                         {
-                            /*int count = strlen_printf(arg);
-                            unsigned int memory_alocated = count / 8;
-                            arg = arg - (8 * memory_alocated);*/
+                            //int count = strlen_printf(arg);
+                            //unsigned int memory_alocated = count / 8;
+                            //arg = arg - (8 * memory_alocated);
                             arg-=16;
                             puts(*(const char**)arg);
                             arg-=16;
@@ -382,7 +382,7 @@ void printf(const char* fmt, ...)
                         break;
                     
                     //Not working still
-                    /*case 'd':
+                    case 'd':
                     case 'i':   
                         numSystem = 10; sign = true;
                         arg = printf_number(arg, length, sign, numSystem);
@@ -409,7 +409,7 @@ void printf(const char* fmt, ...)
                     case 'f':
                         numSystem = 10; sign = true;
                         arg = printf_number(arg, length, sign, numSystem);
-                        break;*/
+                        break;
 
                     default:    
                         break;
@@ -423,4 +423,4 @@ void printf(const char* fmt, ...)
 
         fmt++;
     }
-}
+}*/
