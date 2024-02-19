@@ -1,17 +1,13 @@
-#include "stdlib.h"
+#include "stdlib1.h"
 #include <stdio.h>
 
-char* heap;
-char* brkp = NULL;
-char* endp = NULL;
-
 void init(){
-    heap = (char *)mmap(NULL, MAX_HEAP, (PROT_READ | PROT_WRITE) , (MAP_PRIVATE | MAP_ANONYMOUS) , -1, 0);
-    brkp = heap;
-    endp = brkp + MAX_HEAP;
+    char* heap = (char *)mmap1(NULL, MAX_HEAP, (PROT_READ | PROT_WRITE) , (MAP_PRIVATE | MAP_ANONYMOUS) , -1, 0);
+    char* brkp = heap;
+    char* endp = brkp + MAX_HEAP;
 }
 
-void *sbrk(size_t size)
+void *sbrk1(size_t1 size)
 {
     if(size == 0)
     {
@@ -26,10 +22,10 @@ void *sbrk(size_t size)
     return free;
 }
 
-m_block* allocate_memory_block(size_t size){
-    void* mem_addr = (void* )sbrk(0); 
-    m_block* block = (m_block*)sbrk(0);
-    void* allocate_memory = sbrk(sizeof(m_block) + size);
+m_block* allocate_memory_block(size_t1 size){
+    void* mem_addr = (void* )sbrk1(0); 
+    m_block* block = (m_block*)sbrk1(0);
+    void* allocate_memory = sbrk1(sizeof(m_block) + size);
     if(allocate_memory != (void *)-1){
         block->is_free = false;
         block->size = size;
@@ -42,9 +38,9 @@ m_block* allocate_memory_block(size_t size){
     }
 }
 
-void malloc(size_t size , m_block** head){
+void malloc1(size_t1 size , m_block** head){
     m_block* current = * head ; 
-    void* mem_addr = (void *)sbrk(0);
+    void* mem_addr = (void *)sbrk1(0);
     if(current == NULL){
         *head = allocate_memory_block(size); 
     }
@@ -52,8 +48,8 @@ void malloc(size_t size , m_block** head){
         while(current->next != NULL){
             current = current->next ; 
         }
-        m_block* block = (m_block*) sbrk(0); 
-        void* allocate_memory = sbrk(sizeof(m_block) + size);
+        m_block* block = (m_block*) sbrk1(0); 
+        void* allocate_memory = sbrk1(sizeof(m_block) + size);
         if(allocate_memory != (void *)-1){
             block->is_free = false; 
             block->mem_addr = mem_addr;
