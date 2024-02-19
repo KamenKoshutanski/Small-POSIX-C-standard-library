@@ -1,8 +1,15 @@
-#include <stdio.h>
-#include <limits.h>
+#include "stdio.h"
+#include "../unistd/unistd.h"
 
 int main(){
-    printf("The %d\n", CHAR_BIT);
-    printf("The %d\n", SCHAR_MAX);
-    printf("The %d\n", SCHAR_MIN);
+    printf("Hello\n");
+    //printf("%ls %c", "Hello world Yey\n" "\n");
+    //printf("%s", "AHell\n");
+    //printf("%c", "B");
+    printf("%d\n", 2);
+    return 0;
+}
+void _start(){
+    int main_ret = main();
+    _exit(main_ret);
 }
