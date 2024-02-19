@@ -120,7 +120,7 @@ void main(int argc, char *argv[])
       printf("ERROR: Unable to allocate memory.\n");
    }
 
-   int pid = clone1(fn, pchild_stack, 0, argv[1]); //SIGCHILD
+   int pid = clone(fn, pchild_stack, 17, argv[1]); //SIGCHILD
    if ( pid < 0 ) {
         printf("ERROR: Unable to create the child process.\n");
    }
