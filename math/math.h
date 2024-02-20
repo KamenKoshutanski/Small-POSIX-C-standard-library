@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _MATH.H
+#define _MATH.H
 
 double ln(double x);
 double log10(double x);
@@ -10,3 +11,5 @@ double fabs(double x);
 double floor(double x);
 double fmod(double x, double y); 
 double log(int base, double x);
+
+#endif

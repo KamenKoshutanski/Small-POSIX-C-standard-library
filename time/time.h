@@ -1,5 +1,6 @@
-#pragma once
-//#include "../stdint.h"
+#ifndef _TIME_H
+#define _TIME_H
+
 #include "../stdint.h"
 typedef long clock_t;
 typedef int32_t __time32_t;	
@@ -16,3 +17,5 @@ struct timespec
 int nanosleep(const struct timespec *req, struct timespec *rem);
 int nanoseconds(int nanoseconds);
 int sleep(int seconds);
+
+#endif

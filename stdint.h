@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _STDINT_H
+#define _STDINT_H
 
 typedef signed char int8_t;
 typedef unsigned char uint8_t;
@@ -23,3 +24,5 @@ typedef unsigned long long int uint64_t;
 #define UINT16_MAX   65535U
 #define UINT32_MAX   4294967295
 #define UINT64_MAX   18446744073709551615
+
+#endif

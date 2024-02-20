@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _STRING_H
+#define _STRING_H
 
 typedef unsigned int size_t;
 #define NULL 0
@@ -17,3 +18,5 @@ char *strrchr(const char *str, int c);
 size_t strspn(const char *str1, const char *str2);
 char *strstr(const char *haystack, const char *needle);
 char *strtok(char *str, const char *delim);
+
+#endif

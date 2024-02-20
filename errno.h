@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _ERRNO_H
+#define _ERRNO_H
 
 #define	EPERM 1		
 #define	ENOENT 2	
@@ -124,3 +125,5 @@
 #define EOVERFLOW 139	
 #define EWOULDBLOCK EAGAIN	
 #define __ELASTERROR 2000	
+
+#endif
