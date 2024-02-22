@@ -25,13 +25,15 @@ void main(int argc, char *argv[])
    printf("Hello, World!\n");
 
    m_block* block = NULL; 
-   malloc1(1024*1024 , &block); 
+   malloc1(1024*1024 , &block);
    void *pchild_stack = block->mem_addr;
    if ( pchild_stack == NULL ) {
       printf("ERROR: Unable to allocate memory.\n");
    }
-
-   int pid = clone1(fn, pchild_stack + (1024 * 1024), 17, NULL); //SIGCHILD
+   pid_t *parent_tid = (pid_t *)8182; 
+   void *tls = NULL; 
+   pid_t *child_tid = (pid_t *)8183;
+   int pid = clone(fn, pchild_stack + (1024 * 1024), 17, NULL, parent_tid, tls, child_tid); //SIGCHILD
    printf("he: %d\n", pid);
    if ( pid < 0 ) {
         printf("ERROR: Unable to create the child process.\n");

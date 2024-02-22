@@ -17,7 +17,6 @@ getppid1:
 .global clone1
 
 clone1:
-
     mov w8, #220 //435
     svc #0
     ret
