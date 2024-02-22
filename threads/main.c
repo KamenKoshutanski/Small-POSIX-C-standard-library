@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <sched.h>
-//#include <stdlib.h>
-#include <sys/wait.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include "stdlib1.h"
+#include "stdlib.h"
 #include "threads.h"
 
 int fn(void *arg)
@@ -13,32 +12,33 @@ int fn(void *arg)
    int i = 0;
 
    for ( i = 1 ; i <= 10 ; i++ )
-      printf("%d * %d = %d\n", 6, i, (6*i));
+      printf("%d * %d = %d\n", 7, i, (7*i));
 
    printf("\n");
 
    return 0;
 }
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
    printf("Hello, World!\n");
-
-   m_block* block = NULL; 
-   malloc1(1024*1024 , &block);
-   void *pchild_stack = block->mem_addr;
+   void *pchild_stack = malloc(1080 * 1080);
    if ( pchild_stack == NULL ) {
       printf("ERROR: Unable to allocate memory.\n");
    }
-   pid_t *parent_tid = (pid_t *)8182; 
-   void *tls = NULL; 
-   pid_t *child_tid = (pid_t *)8183;
-   int pid = clone(fn, pchild_stack + (1024 * 1024), 17, NULL, parent_tid, tls, child_tid); //SIGCHILD
+   int *parent_tid = (int *)43565;
+   int *child_tid = (int *)43566;
+   int pid = clone2(17, pchild_stack, parent_tid, child_tid, NULL); //SIGCHILD
    printf("he: %d\n", pid);
    if ( pid < 0 ) {
         printf("ERROR: Unable to create the child process.\n");
    }
-
-
+   if(getpid1() - 2 == pid)
+   {
+      kill(getpid1(), 2);
+   }
+   
+   //kill(getpid1(), 2);
    printf("INFO: Child process terminated.%d\n", getpid1());
+   return 0;
 }

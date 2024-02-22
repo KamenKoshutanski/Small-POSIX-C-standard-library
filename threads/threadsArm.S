@@ -14,9 +14,23 @@ getppid1:
     svc #0
     ret
 
-.global clone1
+.global clone2
 
-clone1:
+clone2:
     mov w8, #220 //435
+    svc #0
+    ret
+
+.global kill
+
+kill:
+    mov w8, #129
+    svc #0
+    ret
+
+.global wait
+
+wait:
+    mov w8, #260
     svc #0
     ret
