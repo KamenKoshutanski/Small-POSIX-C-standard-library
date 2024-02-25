@@ -14,3 +14,9 @@ munmap:
     svc #0
     ret
     
+.global exit
+
+exit:
+    mov w8, #93
+    svc #0
+    

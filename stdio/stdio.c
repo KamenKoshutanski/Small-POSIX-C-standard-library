@@ -30,157 +30,6 @@ void puts(const char* str)
     }
 }
 
-int* printf_number(int* arg, int length, bool sign, int numSystem);
-
-unsigned int strlen_printf(const char *s)
-{
-    unsigned int count = 0;
-    while(*s!='\0')
-    {
-        count++;
-        s--;
-    }
-    return count;
-}
-
-/*void printf(const char* fmt, ...)
-{
-    const char* arg = fmt;
-    int state = PRINTF_STATE_DEFAULT;
-    int length = PRINTF_LENGTH_DEFAULT;
-    int numSystem = 10;
-    bool sign = false;
-    arg-=8;
-    while (*fmt)
-    {
-        switch (state)
-        {
-            case PRINTF_STATE_DEFAULT:
-                switch (*fmt)
-                {
-                    case '%':   
-                        state = PRINTF_STATE_LENGTH;
-                        break;
-                    default:  
-                        putc(*fmt);
-                        break;
-                }
-                break;
-
-            case PRINTF_STATE_LENGTH:
-                switch (*fmt)
-                {
-                    case 'h':   
-                        length = PRINTF_LENGTH_SHORT;
-                        state = PRINTF_STATE_LENGTH_SHORT;
-                        break;
-                    case 'l':   
-                        length = PRINTF_LENGTH_LONG;
-                        state = PRINTF_STATE_LENGTH_LONG;
-                        break;
-                    default:    
-                        goto PRINTF_STATE_SPEC_;
-                }
-                break;
-
-            case PRINTF_STATE_LENGTH_SHORT:
-                if (*fmt == 'h')
-                {
-                    length = PRINTF_LENGTH_SHORT_SHORT;
-                    state = PRINTF_STATE_SPEC;
-                }
-                else
-                {
-                   goto PRINTF_STATE_SPEC_; 
-                }
-                break;
-
-            case PRINTF_STATE_LENGTH_LONG:
-                if (*fmt == 'l')
-                {
-                    length = PRINTF_LENGTH_LONG_LONG;
-                    state = PRINTF_STATE_SPEC;
-                }
-                else
-                {
-                   goto PRINTF_STATE_SPEC_; 
-                }
-                break;
-
-            case PRINTF_STATE_SPEC:
-            PRINTF_STATE_SPEC_:
-                switch (*fmt)
-                {
-                    case 'c':   
-                        putc((char)*arg);
-                        arg-=8;
-                        break;
-
-                    case 's':   
-                        if (length == PRINTF_LENGTH_LONG || length == PRINTF_LENGTH_LONG_LONG) 
-                        {
-                            int count = strlen_printf(arg);
-                            unsigned int memory_alocated = count / 8;
-                            arg = arg - (8 * memory_alocated);
-                            puts(arg);
-                            arg-=16;
-                        }
-                        else 
-                        {
-                            puts(arg);
-                            arg-=8;
-                        }
-                        break;
-
-                    case '%':
-                        putc('%');
-                        break;
-                    
-                    //Not working still
-                    case 'd':
-                    case 'i':   
-                        numSystem = 10; sign = true;
-                        arg = printf_number(arg, length, sign, numSystem);
-                        break;
-
-                    case 'u':   
-                        numSystem = 10; sign = false;
-                        arg = printf_number(arg, length, sign, numSystem);
-                        break;
-
-                    case 'X':
-                    case 'x':
-                    case 'p':   
-                        numSystem = 16; sign = false;
-                        arg = printf_number(arg, length, sign, numSystem);
-                        break;
-
-                    case 'o':   
-                        numSystem = 8; sign = false;
-                        arg = printf_number(arg, length, sign, numSystem);
-                        break;
-                    
-                    //not implemented
-                    case 'f':
-                        numSystem = 10; sign = true;
-                        arg = printf_number(arg, length, sign, numSystem);
-                        break;
-
-                    default:    
-                        break;
-                }
-                state = PRINTF_STATE_DEFAULT;
-                length = PRINTF_LENGTH_DEFAULT;
-                numSystem = 10;
-                sign = false;
-                break;
-        }
-
-        fmt++;
-    }
-    arg = "";
-}*/
-
 const char g_HexChars[] = "0123456789abcdef";
 
 int* printf_number(int* arg, int length, bool sign, int numSystem)
@@ -289,7 +138,17 @@ void printf(const char* fmt, ...)
     int length = PRINTF_LENGTH_DEFAULT;
     int numSystem = 10;
     bool sign = false;
-    arg+=44;
+    arg+=48;
+    // for(int i = 0; i < 20; i++)
+    // {
+    //     if(*arg == 1 || *arg == 2){
+    //         puts("OK");
+    //     }
+    //     else{
+    //         puts("NO\n");
+    //     }
+    //     arg+=2;
+    // }
     while (*fmt)
     {
         switch (state)
@@ -358,12 +217,10 @@ void printf(const char* fmt, ...)
                     case 's':   
                         if (length == PRINTF_LENGTH_LONG || length == PRINTF_LENGTH_LONG_LONG) 
                         {
-                            //int count = strlen_printf(arg);
-                            //unsigned int memory_alocated = count / 8;
-                            //arg = arg - (8 * memory_alocated);
-                            arg-=16;
-                            puts(*(const char**)arg);
-                            arg+=2;
+                            char *n = *(char *)(arg);
+                            puts("Help\n");
+                            puts(n);
+                            arg+=4;
                         }
                         else 
                         {

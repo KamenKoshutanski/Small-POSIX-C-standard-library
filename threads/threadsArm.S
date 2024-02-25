@@ -1,22 +1,22 @@
 .section .text
 
-.global getpid1
+.global getpid
 
-getpid1:
+getpid:
     mov w8, #172
     svc #0
     ret
 
-.global getppid1
+.global getppid
 
-getppid1:
+getppid:
     mov w8, #173
     svc #0
     ret
 
-.global clone2
+.global clone_kernel
 
-clone2:
+clone_kernel:
     mov w8, #220 //435
     svc #0
     ret
