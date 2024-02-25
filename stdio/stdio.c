@@ -15,6 +15,7 @@
 #define PRINTF_LENGTH_LONG          3
 #define PRINTF_LENGTH_LONG_LONG     4
 
+
 void putc(char c)
 {
     putToStdOut(&c);
@@ -29,7 +30,7 @@ void puts(const char* str)
     }
 }
 
-const char* printf_number(const char* arg, int length, bool sign, int numSystem);
+int* printf_number(int* arg, int length, bool sign, int numSystem);
 
 unsigned int strlen_printf(const char *s)
 {
@@ -42,7 +43,7 @@ unsigned int strlen_printf(const char *s)
     return count;
 }
 
-void printf(const char* fmt, ...)
+/*void printf(const char* fmt, ...)
 {
     const char* arg = fmt;
     int state = PRINTF_STATE_DEFAULT;
@@ -178,11 +179,11 @@ void printf(const char* fmt, ...)
         fmt++;
     }
     arg = "";
-}
+}*/
 
 const char g_HexChars[] = "0123456789abcdef";
 
-const char* printf_number(const char* arg, int length, bool sign, int numSystem)
+int* printf_number(int* arg, int length, bool sign, int numSystem)
 {
     char buffer[32];
     unsigned long long number;
@@ -195,7 +196,7 @@ const char* printf_number(const char* arg, int length, bool sign, int numSystem)
         case PRINTF_LENGTH_DEFAULT:
             if (sign)
             {
-                int n = (int)*arg;
+                int n = *(arg);
                 if (n < 0)
                 {
                     n = -n;
@@ -207,7 +208,7 @@ const char* printf_number(const char* arg, int length, bool sign, int numSystem)
             {
                 number = *(unsigned int*)arg;
             }
-            arg -= 8;
+            arg += 2;
             break;
 
         case PRINTF_LENGTH_LONG:
@@ -225,7 +226,7 @@ const char* printf_number(const char* arg, int length, bool sign, int numSystem)
             {
                 number = *(unsigned long int*)arg;
             }
-            arg -= 16;
+            arg += 4;
             break;
 
         case PRINTF_LENGTH_LONG_LONG:
@@ -243,12 +244,11 @@ const char* printf_number(const char* arg, int length, bool sign, int numSystem)
             {
                 number = *(unsigned long long int*)arg;
             }
-            arg -= 32;
+            arg += 8;
             break;
     }
 
-    do 
-    {
+    do{
         uint32_t remain = number % numSystem;
         number = number / numSystem;
         buffer[pos++] = g_HexChars[remain];
@@ -282,19 +282,14 @@ char *gets(char *str){
     return str;
 }*/
 
-
-/*void printf1(const char* fmt, ...)
+void printf(const char* fmt, ...)
 {
     int* arg = (int*)&fmt;
     int state = PRINTF_STATE_DEFAULT;
     int length = PRINTF_LENGTH_DEFAULT;
     int numSystem = 10;
     bool sign = false;
-    puts("First:\n");
-    for(int i = 0; i < 240; i++){
-        puts(*(const char**)arg-i);
-    }
-    arg-=8;
+    arg+=44;
     while (*fmt)
     {
         switch (state)
@@ -357,7 +352,7 @@ char *gets(char *str){
                 {
                     case 'c':   
                         putc((char)*arg);
-                        arg-=8;
+                        arg+=2;
                         break;
 
                     case 's':   
@@ -368,12 +363,13 @@ char *gets(char *str){
                             //arg = arg - (8 * memory_alocated);
                             arg-=16;
                             puts(*(const char**)arg);
-                            arg-=16;
+                            arg+=2;
                         }
                         else 
                         {
-                            puts(*(const char**)arg);
-                            arg-=8;
+                            char *n = (char *)*(arg);
+                            puts(n);
+                            arg+=2;
                         }
                         break;
 
@@ -423,4 +419,4 @@ char *gets(char *str){
 
         fmt++;
     }
-}*/
+}

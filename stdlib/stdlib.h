@@ -25,7 +25,7 @@ static void init() __attribute__ ((constructor));
 
 void *mmap(void *addr/*[.lenght]*/, size_t length, int prot, int flags, int fd, off_t offset);
 int munmap(void *addr/*[.lenght]*/, size_t length);
-void malloc(size_t size , m_block** head);
+void *malloc(size_t size);
 void free_block(m_block** head);
 void print_blocks(m_block* current);
 

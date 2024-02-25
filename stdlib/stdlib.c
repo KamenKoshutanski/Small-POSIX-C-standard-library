@@ -4,11 +4,13 @@
 char* heap;
 char* brkp = NULL;
 char* endp = NULL;
+m_block block;
 
 void init(){
     heap = (char *)mmap(NULL, MAX_HEAP, (PROT_READ | PROT_WRITE) , (MAP_PRIVATE | MAP_ANONYMOUS) , -1, 0);
     brkp = heap;
     endp = brkp + MAX_HEAP;
+    m_block block = NULL;
 }
 
 void *sbrk(size_t size)
@@ -42,7 +44,7 @@ m_block* allocate_memory_block(size_t size){
     }
 }
 
-void malloc(size_t size , m_block** head){
+void malloc_block(size_t size , m_block** head){
     m_block* current = * head ; 
     void* mem_addr = (void *)sbrk(0);
     if(current == NULL){
@@ -62,6 +64,12 @@ void malloc(size_t size , m_block** head){
             current->next = block; 
         }
     }
+}
+
+void *malloc(size_t size)
+{
+    malloc_block(size, &block);
+    return block->mem_addr;
 }
 
 void free_block(m_block** head){

@@ -6,7 +6,6 @@ all:
 	aarch64-linux-gnu-as -c time/timeArm.S -o objects/timeArm.o
 	aarch64-linux-gnu-gcc -c time/time.c -o objects/time.o -nostdlib -nostdinc -ffreestanding -static
 	aarch64-linux-gnu-as -c unistd/unistdArm.S -o objects/unistdArm.o
-	aarch64-linux-gnu-gcc -c unistd/unistd.c -o objects/unistd.o -nostdlib -nostdinc -ffreestanding -static
 	aarch64-linux-gnu-gcc -c string/string.c -o objects/string.o -nostdlib -nostdinc -ffreestanding -static
 	aarch64-linux-gnu-gcc -c ctype/ctype.c -o objects/ctype.o -nostdlib -nostdinc -ffreestanding -static
 	aarch64-linux-gnu-gcc -c math/math.c -o objects/math.o -nostdlib -nostdinc -ffreestanding -static
@@ -16,7 +15,7 @@ all:
 	aarch64-linux-gnu-gcc -c stdarg/stdarg.c -o objects/stdarg.o -nostdlib -nostdinc -ffreestanding -static
 
 build:
-	aarch64-linux-gnu-gcc objects/main.o objects/start.o objects/stdarg.o objects/threadsArm.o objects/stdlib.o objects/stdlibArm.o objects/ctype.o objects/string objects/unistd.o objects/unistdArm.o objects/stdioArm.o objects/stdio.o objects/math.o objects/time.o objects/timeArm.o -o runnable/main -nostdlib -nostdinc -ffreestanding -static
+	aarch64-linux-gnu-gcc objects/main.o objects/start.o objects/stdarg.o objects/threadsArm.o objects/stdlib.o objects/stdlibArm.o objects/ctype.o objects/string objects/unistdArm.o objects/stdioArm.o objects/stdio.o objects/math.o objects/time.o objects/timeArm.o -o runnable/main -nostdlib -nostdinc -ffreestanding -static
 
 run:
 	./runnable/main
