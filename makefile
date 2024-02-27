@@ -1,6 +1,5 @@
 all:
-	aarch64-linux-gnu-gcc -c main.c -o objects/main.o -nostdlib -nostdinc -ffreestanding -static
-	aarch64-linux-gnu-as -c start.S -o objects/start.o
+	aarch64-linux-gnu-as -c start/start.S -o objects/start.o
 	aarch64-linux-gnu-as -c stdio/stdioArm.S -o objects/stdioArm.o
 	aarch64-linux-gnu-gcc -c stdio/stdio.c -o objects/stdio.o -nostdlib -nostdinc -ffreestanding -static
 	aarch64-linux-gnu-as -c time/timeArm.S -o objects/timeArm.o
@@ -24,3 +23,6 @@ complete:
 	aarch64-linux-gnu-gcc -c main.c -o objects/main.o -nostdlib -nostdinc -ffreestanding -static
 	aarch64-linux-gnu-gcc objects/main.o objects/start.o objects/threads.o objects/threadsArm.o objects/stdlib.o objects/stdlibArm.o objects/ctype.o objects/string.o objects/unistdArm.o objects/stdioArm.o objects/stdio.o objects/math.o objects/time.o objects/timeArm.o -o runnable/main -nostdlib -nostdinc -ffreestanding -static
 	./runnable/main
+
+main:
+	aarch64-linux-gnu-gcc -c main.c -o objects/main.o -nostdlib -nostdinc -ffreestanding -static

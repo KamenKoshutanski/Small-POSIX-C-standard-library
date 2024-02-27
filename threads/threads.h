@@ -4,9 +4,6 @@
 typedef signed int pid_t;
 #define NULL 0
 
-
-
-
 pid_t getpid(void);
 pid_t getppid(void);
 

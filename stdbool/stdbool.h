@@ -1,7 +1,7 @@
 #ifndef _STDBOOL_H
 #define _STDBOOL_H
 
-#include "stdint.h"
+#include "../stdint/stdint.h"
 
 typedef uint8_t bool;
 

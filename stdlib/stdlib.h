@@ -1,7 +1,7 @@
 #ifndef _STDLIB_H
 #define _STDLIB_H
 
-#include "../stdbool.h"
+#include "../stdbool/stdbool.h"
 
 typedef unsigned long int size_t;
 typedef signed long int off_t;
