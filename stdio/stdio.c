@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "stdioArm.h"
-#include "../stdint.h"
-#include "../stdbool.h"
+#include "../stdint/stdint.h"
+#include "../stdbool/stdbool.h"
 
 #define PRINTF_STATE_DEFAULT        0
 #define PRINTF_STATE_LENGTH         1

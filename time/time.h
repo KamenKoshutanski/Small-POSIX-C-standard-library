@@ -1,7 +1,7 @@
 #ifndef _TIME_H
 #define _TIME_H
 
-#include "../stdint.h"
+#include "../stdint/stdint.h"
 typedef long clock_t;
 typedef int32_t __time32_t;	
 typedef int64_t __time64_t;	
