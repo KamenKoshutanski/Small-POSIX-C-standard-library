@@ -25,9 +25,7 @@ void *mmap(void *addr/*[.lenght]*/, size_t length, int prot, int flags, int fd, 
 int munmap(void *addr/*[.lenght]*/, size_t length);
 void *malloc(size_t size);
 void malloc_block(size_t size , m_block** head);
-void free_block(m_block** head);
 void print_blocks(m_block* current);
-void print_memory();
 void exit(int status);
 
 #endif

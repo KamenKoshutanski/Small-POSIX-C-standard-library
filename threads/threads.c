@@ -18,5 +18,5 @@ int clone(int (*fn)(void *), void *stack, int flags, void *arg, pid_t *parent_ti
 }
 
 int task_on_different_thread(int (*fn)(void *)){
-    clone(fn, NULL, 17, NULL, NULL, NULL, NULL);
+    return clone(fn, NULL, 17, NULL, NULL, NULL, NULL);
 }

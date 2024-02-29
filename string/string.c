@@ -3,7 +3,8 @@
 char *strcchr(const char *str, int c){
     for(int i = 0; i < strlen(str); i++)
     {
-        if(str[i] == c){
+        if(str[i] == c)
+        {
             return ((char*)(str) + i);
         }
     }
@@ -24,7 +25,8 @@ size_t strlen(const char *str)
 char *strcat(char *dest, const char *src)
 {
     unsigned int lenght = strlen(dest);
-    for(int i = 0; i < strlen(src); i++){
+    for(int i = 0; i < strlen(src); i++)
+    {
         dest[lenght + i] = src[i];
     }
     dest[strlen(dest) + strlen(src)] = '\0';
@@ -52,7 +54,8 @@ int strcmp(const char *str1, const char *str2)
         }
     }
 
-    if(strlen(str1) > strlen(str2)){
+    if(strlen(str1) > strlen(str2))
+    {
         return str1[strlen(str2)];
     }
     else if(strlen(str1) < strlen(str2))
@@ -73,7 +76,8 @@ int strncmp(const char *str1, const char *str2, size_t n)
         }
     }
 
-    if(strlen(str1) > strlen(str2) && n > strlen(str1) && n > strlen(str2)){
+    if(strlen(str1) > strlen(str2) && n > strlen(str1) && n > strlen(str2))
+    {
         return str1[strlen(str2)];
     }
     else if(strlen(str1) < strlen(str2) && n > strlen(str2))
@@ -138,7 +142,8 @@ char *strrchr(const char *str, int c)
     char *curLast = NULL; 
     for(int i = 0; i < strlen(str); i++)
     {
-        if(str[i] == c){
+        if(str[i] == c)
+        {
            curLast = (char*)(str + i);
         }
     }
@@ -159,7 +164,8 @@ size_t strspn(const char *str1, const char *str2)
                 count++;
             }
         }
-        if(consecutive_flag == 0){
+        if(consecutive_flag == 0)
+        {
             return count;
         }
         consecutive_flag = 0;
@@ -196,7 +202,9 @@ unsigned int is_delim(char c, char *delim)
     while(*delim != '\0')
     {
         if(c == *delim)
+        {
             return 1;
+        }
         delim++;
     }
     return 0;

@@ -43,10 +43,10 @@ int* printf_number(int* arg, int length, bool sign, int numSystem)
         case PRINTF_LENGTH_SHORT_SHORT:
         case PRINTF_LENGTH_SHORT:
         case PRINTF_LENGTH_DEFAULT:
-            if (sign)
+            if(sign)
             {
                 int n = *(arg);
-                if (n < 0)
+                if(n < 0)
                 {
                     n = -n;
                     number_sign = -1;
@@ -61,10 +61,10 @@ int* printf_number(int* arg, int length, bool sign, int numSystem)
             break;
 
         case PRINTF_LENGTH_LONG:
-            if (sign)
+            if(sign)
             {
                 long int n = *(long int*)arg;
-                if (n < 0)
+                if(n < 0)
                 {
                     n = -n;
                     number_sign = -1;
@@ -79,10 +79,10 @@ int* printf_number(int* arg, int length, bool sign, int numSystem)
             break;
 
         case PRINTF_LENGTH_LONG_LONG:
-            if (sign)
+            if(sign)
             {
                 long long int n = *(long long int*)arg;
-                if (n < 0)
+                if(n < 0)
                 {
                     n = -n;
                     number_sign = -1;
@@ -101,14 +101,14 @@ int* printf_number(int* arg, int length, bool sign, int numSystem)
         uint32_t remain = number % numSystem;
         number = number / numSystem;
         buffer[pos++] = g_HexChars[remain];
-    } while (number > 0);
+    }while(number > 0);
 
-    if (sign && number_sign < 0)
+    if(sign && number_sign < 0)
     {
         buffer[pos++] = '-';
     }
 
-    while (--pos >= 0)
+    while(--pos >= 0)
     {
         putc(buffer[pos]);
     }
@@ -117,20 +117,6 @@ int* printf_number(int* arg, int length, bool sign, int numSystem)
     return arg;
 }
 
-//needs testing
-/*int getchar(void){
-    getFromStdIn();
-}
-
-char *gets(char *str){
-    while(getchar() != EOF || getchar() != "\n")
-    {
-        *str = getchar();
-        str++;
-    }
-    return str;
-}*/
-
 void printf(const char* fmt, ...)
 {
     int* arg = (int*)&fmt;
@@ -138,23 +124,13 @@ void printf(const char* fmt, ...)
     int length = PRINTF_LENGTH_DEFAULT;
     int numSystem = 10;
     bool sign = false;
-    arg+=48;
-    // for(int i = 0; i < 20; i++)
-    // {
-    //     if(*arg == 1 || *arg == 2){
-    //         puts("OK");
-    //     }
-    //     else{
-    //         puts("NO\n");
-    //     }
-    //     arg+=2;
-    // }
-    while (*fmt)
+    arg += 48;
+    while(*fmt)
     {
-        switch (state)
+        switch(state)
         {
             case PRINTF_STATE_DEFAULT:
-                switch (*fmt)
+                switch(*fmt)
                 {
                     case '%':   
                         state = PRINTF_STATE_LENGTH;
@@ -166,7 +142,7 @@ void printf(const char* fmt, ...)
                 break;
 
             case PRINTF_STATE_LENGTH:
-                switch (*fmt)
+                switch(*fmt)
                 {
                     case 'h':   
                         length = PRINTF_LENGTH_SHORT;
@@ -182,7 +158,7 @@ void printf(const char* fmt, ...)
                 break;
 
             case PRINTF_STATE_LENGTH_SHORT:
-                if (*fmt == 'h')
+                if(*fmt == 'h')
                 {
                     length = PRINTF_LENGTH_SHORT_SHORT;
                     state = PRINTF_STATE_SPEC;
@@ -194,7 +170,7 @@ void printf(const char* fmt, ...)
                 break;
 
             case PRINTF_STATE_LENGTH_LONG:
-                if (*fmt == 'l')
+                if(*fmt == 'l')
                 {
                     length = PRINTF_LENGTH_LONG_LONG;
                     state = PRINTF_STATE_SPEC;
@@ -207,26 +183,25 @@ void printf(const char* fmt, ...)
 
             case PRINTF_STATE_SPEC:
             PRINTF_STATE_SPEC_:
-                switch (*fmt)
+                switch(*fmt)
                 {
                     case 'c':   
                         putc((char)*arg);
-                        arg+=2;
+                        arg += 2;
                         break;
 
                     case 's':   
-                        if (length == PRINTF_LENGTH_LONG || length == PRINTF_LENGTH_LONG_LONG) 
+                        if(length == PRINTF_LENGTH_LONG || length == PRINTF_LENGTH_LONG_LONG) 
                         {
-                            char *n = *(char *)(arg);
-                            puts("Help\n");
+                            char *n = (char *)*(arg);
                             puts(n);
-                            arg+=4;
+                            arg += 4;
                         }
                         else 
                         {
                             char *n = (char *)*(arg);
                             puts(n);
-                            arg+=2;
+                            arg += 2;
                         }
                         break;
 
@@ -234,7 +209,6 @@ void printf(const char* fmt, ...)
                         putc('%');
                         break;
                     
-                    //Not working still
                     case 'd':
                     case 'i':   
                         numSystem = 10; sign = true;
@@ -255,12 +229,6 @@ void printf(const char* fmt, ...)
 
                     case 'o':   
                         numSystem = 8; sign = false;
-                        arg = printf_number(arg, length, sign, numSystem);
-                        break;
-                    
-                    //not implemented
-                    case 'f':
-                        numSystem = 10; sign = true;
                         arg = printf_number(arg, length, sign, numSystem);
                         break;
 

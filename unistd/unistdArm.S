@@ -13,13 +13,3 @@ write:
 _exit:
     mov w8, #93
     svc #0
-
-.global read
-
-//read:
-    //ldr x1, =buffer
-   // mov w8, #63
-   // svc #0
-    
-//.section .data
-//buffer: .space 100

@@ -3,104 +3,73 @@
 #define LN10 (2.3025850929940456840179914546844)
 #define M_PI (3.1415927)
 #define M_PI_2 (M_PI/2.0)
-#define M_PI_M_2 (M_PI*2.0)
-#define E (2.71828182846)
 
-//Needs testing
-
-double pow(double x, double y) //doenst work with doubles
+double log(double x)
 {
-    int yIsNegative = 0;
-    if(y < 0){
-        y = -y;
-        yIsNegative = 1;
-    }
-    double ans = 1;
-    int i;
-    for(i = 0; i < y; i++)
-    {
-        ans = ans * x;
-    }
-    if(yIsNegative == 1)
-    {
-        return 1/ans;
-    }
-    return ans;
-}
-
-double ln(double x)
-{
-    double old_sum = 0.0;
+    double oldSum = 0.0;
     double xmlxpl = (x - 1) / (x + 1);
     double xmlxpl_2 = xmlxpl * xmlxpl;
     double denom = 1.0;
     double frac = xmlxpl;
     double term = frac;               
     double sum = term;
+    double tolerance = 1e-10;
 
-    while ( sum != old_sum )
+    while(fabs(sum - oldSum) > tolerance)
     {
-        old_sum = sum;
+        oldSum = sum;
         denom += 2.0;
         frac *= xmlxpl_2;
         sum += frac / denom;
     }
     return 2.0 * sum;
+
 }
 
 double log10(double x) 
 {
-    return ln(x) / LN10;    
+    return log(x) / LN10;    
 }
 
 double log2(double x){
-    return log10(x)/log10(2);
+    return log10(x) / log10(2);
+}
+
+double pow(double x, double y) 
+{
+    return exp(y * log(x));
 }
 
 double sqrt(double x)
 {
-    int start = 0, end = x;
-    int mid;
-    float ans;
-
-    while (start <= end) {
-        mid = (start + end) / 2;
-        if (mid * mid == x) {
-            ans = mid;
-            break;
-        }
-        if (mid * mid < x) {
-            ans=start;
-            start = mid + 1;
-        }
- 
-        else {
-            end = mid - 1;
-        }
-    }
- 
-    float increment = 0.1;
-    for (int i = 0; i < 5; i++) {
-        while (ans * ans <= x) {
-            ans += increment;
-        }
- 
-        ans = ans - increment;
-        increment = increment / 10;
-    }
-    return ans;
-
-    //return pow(2, 0.5 * log2(x)); //pow not working with doubles yet
+    return pow(x, 0.5);
 }
 
 double ceil(double x)
 {
-    return ((double)(int)x) + 1;
+    if(x >= 0) 
+    {
+        int intPart = (int)x;
+        if(x == intPart) 
+        {
+            return x; 
+        } 
+        else 
+        {
+            return intPart + 1;
+        }
+    } 
+    else 
+    {
+        int intPart = (int)x;
+        return (double)(intPart);
+    }
 }
 
 double fabs(double x)
 {
-    if(x < 0){
+    if(x < 0)
+    {
         return x *= -1;
     }
     else
@@ -111,63 +80,59 @@ double fabs(double x)
 
 double floor(double x)
 {
-    return (double)(int)x;
+    if(x >= 0) 
+    {
+        return (double)(int)x;
+    } 
+    else 
+    {
+        int intPart = (int)x;
+        if(x == intPart) 
+        {
+            return x;
+        } 
+        else 
+        {
+            return (double)(intPart - 1); 
+        }
+    }
 }
 
 double fmod(double x, double y) //not correctly implemented
 {
-    double result = x / y;
-    if(result * y == x)
-    {
-        return 0;
-    }
-    else
-    {
-        double remainder = x - (result * y);
-        return remainder;
-    }
+    return x - y * floor(x / y);
 }
 
-double log(int base, double x)
+double log_base(int base, double x)
 {
-    return log10(x)/log10(base);
+    return log10(x) / log10(base);
 }
 
-int compare_float(double f1, double f2)
-{
-    double precision = 0.00000000000000000001;
-    if ((f1 - precision) < f2)
+double cos(double x) {
+    while(x < 0.0) 
     {
-        return -1;
+        x += 2 * M_PI;
     }
-    else if ((f1 + precision) > f2)
+    while(x >= 2 * M_PI) 
     {
-        return 1;
-    }
-        else
-    {
-        return 0;
-    }
-}
-
-double cos(double x){
-    if(x < 0.0)
-    { 
-        x = -x;
+        x -= 2 * M_PI;
     }
 
-    if (0 <= compare_float(x, M_PI_M_2)) 
+    if(x > M_PI)
     {
-        do {
-            x -= M_PI_M_2;
-        }while(0 <= compare_float(x, M_PI_M_2)); 
+        x = 2 * M_PI - x;
     }
-    if ((0 <= compare_float(x, M_PI)) && (-1 == compare_float(x, M_PI_M_2)))
+
+    double result = 1.0;
+    double term = 1.0;
+    int i;
+    for(i = 1; i < 10; i++) 
     {
-        x -= M_PI;
-        return ((-1)*(1.0 - (x*x/2.0) * (1.0 - (x*x/12.0) * (1.0 - (x*x/30.0) * (1.0 - (x*x/56.0) * (1.0 - (x*x/90.0) * (1.0 - (x*x/132.0) * (1.0 - (x*x/182.0)))))))));
-    } 
-        return 1.0 - (x*x/2.0) * (1.0 - (x*x/12.0) * (1.0 - (x*x/30.0) * (1.0 - (x*x/56.0) * (1.0 - (x*x/90.0) * (1.0 - (x*x/132.0) * (1.0 - (x*x/182.0)))))));
+        term *= -x * x / ((2 * i - 1) * (2 * i));
+        result += term;
+    }
+
+    return result;
 }
 
 double sin(double x)
@@ -177,5 +142,14 @@ double sin(double x)
 
 double exp(double x)
 {
-    return pow(E, x); //doesnt work with doubles
+    double result = 1.0;
+    double term = 1.0;
+
+    for(int i = 0; i < 10; i++)
+    {
+        term *= x / i;
+        result += term;
+    }
+    
+    return result;
 }

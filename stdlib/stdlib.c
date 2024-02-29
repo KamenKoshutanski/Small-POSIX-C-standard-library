@@ -22,7 +22,8 @@ void *sbrk(size_t size)
     void *free = (void *)brkp;
 
     brkp += size;
-    if(brkp >= endp){
+    if(brkp >= endp)
+    {
         return NULL;
     }
     return free;
@@ -32,7 +33,8 @@ m_block* allocate_memory_block(size_t size){
     void* mem_addr = (void* )sbrk(0); 
     m_block* block = (m_block*)sbrk(0);
     void* allocate_memory = sbrk(sizeof(m_block) + size);
-    if(allocate_memory != (void *)-1){
+    if(allocate_memory != (void *)-1)
+    {
         block->is_free = true;
         block->size = size;
         block->mem_addr = mem_addr;
@@ -53,16 +55,20 @@ void malloc_block(size_t size , m_block** head)
     }
     m_block* current = * head ; 
     void* mem_addr = (void *)sbrk(0);
-    if(current == NULL){
+    if(current == NULL)
+    {
         *head = allocate_memory_block(size); 
     }
-    else{
-        while(current->next != NULL){
+    else
+    {
+        while(current->next != NULL)
+        {
             current = current->next ; 
         }
         m_block* block = (m_block*) sbrk(0); 
         void* allocate_memory = sbrk(sizeof(m_block) + size);
-        if(allocate_memory != (void *)-1){
+        if(allocate_memory != (void *)-1)
+        {
             block->is_free = true; 
             block->mem_addr = mem_addr;
             block->size = size; 
@@ -80,7 +86,8 @@ void *malloc(size_t size){
         {
             block = block->next;
         }
-        else{
+        else
+        {
             block->is_free = false;
             break;
         }
@@ -88,26 +95,14 @@ void *malloc(size_t size){
     return block->mem_addr;
 }
 
-void free_block(m_block** head)
-{
-    if(*head == NULL){
-    }
-    else
-    (*head)->is_free = true; 
-}
-
 void print_blocks(m_block* current)
 {
-    while( current != NULL){
+    while(current != NULL)
+    {
         printf("is Free %d\n", current->is_free);
         printf("Mem Address %p\n", current->mem_addr);
         printf("Size %ld\n", current->size);
         printf("\n");
         current = current->next; 
     }
-}
-
-void print_current_block()
-{
-    print_blocks(block);
 }
